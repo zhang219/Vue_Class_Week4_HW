@@ -113,7 +113,7 @@ app.component('productModal', {
 
 //全域註冊，刪除 Modal
 app.component('delProductModal', {
-    props: ['tempProduct'],
+    props: ['Product'],
     template: '#templateForDeleteProductModal',
     methods: {
         delProduct() {
