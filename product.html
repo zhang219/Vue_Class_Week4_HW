@@ -90,12 +90,12 @@
             v-on:get-products="getProducts"
             ></product-modal><!--Html是全部小寫-->
         </div>
-        <!--刪除 Modal-->
-        <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
-            aria-labelledby="delProductModalLabel" aria-hidden="true">
+        <!--刪除 Modal元件標籤，需要與在做全域註冊 product.js的 'delete-model'元件名稱相同-->
+        <div id="deleteModal" ref="deleteModal" class="modal fade" tabindex="-1"
+            aria-labelledby="deleteModalLabel" aria-hidden="true">
             <delete-modal 
-            :product="Product" 
-            v-on:del-products="delProducts"
+            :product="tempProduct" 
+            v-on:del-product="delProduct"
             ></delete-modal>
         </div>
         <!-- Modal -->
@@ -216,7 +216,7 @@
         <div class="modal-dialog">
                 <div class="modal-content border-0">
                     <div class="modal-header bg-danger text-white">
-                        <h5 id="delProductModalLabel" class="modal-title">
+                        <h5 id="deleteModalLabel" class="modal-title">
                             <span>刪除產品</span>
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
