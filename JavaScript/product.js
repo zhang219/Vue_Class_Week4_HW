@@ -2,7 +2,7 @@ import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.27/vue
 import pagination from './pagination.js';
 
 let productModal = null;
-let delProductModal = null;
+let deleteModal = null;
 
 const app = createApp({
     components: {
@@ -60,7 +60,7 @@ const app = createApp({
                 productModal.show();
                 this.isNew = false; //編輯頁會是舊的
             } else if (isNew === 'delete') {
-                delProductModal.show();
+                deleteModal.show();
                 this.tempProduct = { ...item };//將item品項帶入
             }
         },
@@ -105,6 +105,16 @@ app.component('productModal', {
                     alert(err.data.message);
                 });
         },
+            createImages() {
+                this.product.imagesUrl = [];
+                this.product.imagesUrl.push('');
+            },
+            openModal() {
+                productModal.show();
+            },
+            hideModal() {
+                productModal.hide();
+            },
     },
     mounted() {
         productModal = new bootstrap.Modal(document.getElementById('productModal'));
@@ -112,7 +122,7 @@ app.component('productModal', {
 })
 
 //全域註冊，刪除 Modal
-app.component('delProductModal', {
+app.component('deleteModal', {
     props: ['Product'],
     template: '#templateForDeleteProductModal',
     methods: {
@@ -123,7 +133,7 @@ app.component('delProductModal', {
                 .then((response) => {
                     console.log(response);
                     this.$emit('del-products')//觸發外層事件
-                    delProductModal.hide();//將Model關掉
+                    deleteModal.hide();//將Model關掉
                 })
                 .catch((err) => {
                     alert(err.data.message);
@@ -131,7 +141,7 @@ app.component('delProductModal', {
         },
     },
     mounted() {
-        delProductModal = new bootstrap.Modal(document.getElementById('delProductModal'));
+        deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
     }
 });
 
