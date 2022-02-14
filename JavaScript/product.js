@@ -112,8 +112,8 @@ app.component('productModal', {
                 });
         },
             createImages() {
-                this.product.imagesUrl = [];
-                this.product.imagesUrl.push('');
+                this.tempProduct.imagesUrl = [];
+                this.tempProduct.imagesUrl.push('');
             },
             openModal() {
                 productModal.show();
