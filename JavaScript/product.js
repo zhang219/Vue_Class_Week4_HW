@@ -85,6 +85,12 @@ const app = createApp({
 app.component('productModal', {
     props: ['tempProduct', 'isNew'],
     template: '#templateForProductModal',
+    data() {
+        return {
+            apiUrl: 'https://vue3-course-api.hexschool.io/v2',
+            apiPath: 'zhang-hexschool',
+        };
+    },
     methods: {
         updateProduct() {
             let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
@@ -125,6 +131,12 @@ app.component('productModal', {
 app.component('deleteModal', {
     props: ['Product'],
     template: '#templateForDeleteProductModal',
+    data() {
+        return {
+            apiUrl: 'https://vue3-course-api.hexschool.io/v2',
+            apiPath: 'zhang-hexschool',
+        };
+    },
     methods: {
         delProduct() {
             const url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
