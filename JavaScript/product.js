@@ -83,7 +83,7 @@ const app = createApp({
 
 //全域註冊
 app.component('productModal', {
-    props: ['tempProduct', 'isNew'],
+    props: ['tempProduct', 'New'],
     template: '#templateForProductModal',
     data() {
         return {
