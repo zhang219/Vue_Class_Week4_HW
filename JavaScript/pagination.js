@@ -2,7 +2,7 @@ export default {
     props: ['pages'],//使用props接收值，定義接收到的值命名為pages
     template: `<nav aria-label="Page navigation example">
     <ul class="pagination">
-      <li class="page-item" :class="{ disabled: !has_pre }">
+      <li class="page-item" :class="{ disabled: !pages.has_pre }">
         <a class="page-link" href="#" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
@@ -13,7 +13,7 @@ export default {
         <a class="page-link" href="#" 
         @click="$emit('get-product', page)">{{page}}</a>
       </li>
-      <li class="page-item"  :class="{ disabled: !has_next }">
+      <li class="page-item"  :class="{ disabled: !pages.has_next }">
         <a class="page-link" href="#" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
