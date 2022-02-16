@@ -5,9 +5,6 @@ let productModal = null;
 let deleteModal = null;
 
 const app = createApp({
-    components: {
-        pagination
-    },//區域註冊 使用的物件屬性
     data() {
         return {
             apiUrl: 'https://vue3-course-api.hexschool.io/v2',
@@ -45,23 +42,24 @@ const app = createApp({
                 })
                 .catch((err) => {
                     alert(err.data.message);
+                    window.location = 'index.html';//驗證失敗 -> 導回登入頁面
                 })
         },
         
         openModal(isNew, item) {
-            if (isNew === 'New') {
+            if (isNew === 'new') {
                 this.tempProduct = { //重製結構
                     imagesUrl: [],
                 }
-                productModal.show();
                 this.isNew = true; //如果是新的會新增
+                productModal.show();
             } else if (isNew === 'edit') {
                 this.tempProduct = { ...item };//外層使用淺拷貝就好--因為物件本身是傳參考，如果直接改product會影響本來的值
-                productModal.show();
                 this.isNew = false; //編輯頁會是舊的
+                productModal.show();
             } else if (isNew === 'delete') {
-                deleteModal.show();
                 this.tempProduct = { ...item };//將item品項帶入
+                deleteModal.show();
             }
         },
         //將外層updateProduct往內層丟
@@ -81,22 +79,33 @@ const app = createApp({
     }
 })
 
-//全域註冊
+// 分頁元件
+app.component('pagination', {
+    template: '#pagination',
+    props: ['pages'],
+    methods: {
+        emitPages(item) {
+            this.$emit('emit-pages', item);
+        },
+    },
+});
+
+//全域註冊  產品新增/編輯元件
 app.component('productModal', {
-    props: ['tempProduct', 'New'],
+    props: ['tempProduct', 'isNew'],
     template: '#templateForProductModal',
     data() {
         return {
             apiUrl: 'https://vue3-course-api.hexschool.io/v2',
             apiPath: 'zhang-hexschool',
-            isNew: false //  v-if="isNew"，元件內定義 isNew 
         };
     },
     methods: {
         updateProduct() {
+            // 新增商品
             let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
             let method ='post';
-            if (!this.isNew) { //false
+            if (!this.isNew) { //false，不是新增商品，則切換編輯商品API
                 url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
                 method ='put';
             }
@@ -106,22 +115,22 @@ app.component('productModal', {
                     console.log(response);
                     //this.getProducts(); //沒有get Product(外層的方法)
                     this.$emit('get-products')//觸發外層事件
-                    productModal.hide();//將Model關掉
+                    this.hideModal();//將Model關掉
                 })
                 .catch((err) => {
                     alert(err.data.message);
                 });
         },
-            createImages() {
-                this.tempProduct.imagesUrl = [];
-                this.tempProduct.imagesUrl.push('');
-            },
-            openModal() {
-                productModal.show();
-            },
-            hideModal() {
-                productModal.hide();
-            },
+        createImages() {
+            this.tempProduct.imagesUrl = [];
+            this.tempProduct.imagesUrl.push('');
+        },
+        openModal() {
+            productModal.show();
+        },
+        hideModal() {
+            productModal.hide();
+        },
     },
     mounted() {
         productModal = new bootstrap.Modal(document.getElementById('productModal'));
@@ -145,12 +154,18 @@ app.component('deleteModal', {
             axios.delete(url)
                 .then((response) => {
                     console.log(response);
-                    this.$emit('del-product')//觸發外層事件
+                    this.$emit('get-products')//觸發外層事件
                     deleteModal.hide();//將Model關掉
                 })
                 .catch((err) => {
                     alert(err.data.message);
                 });
+        },
+        openModal() {
+            deleteModal.show();
+        },
+        hideModal() {
+            deleteModal.hide();
         },
     },
     mounted() {
