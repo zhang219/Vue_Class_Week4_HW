@@ -82,23 +82,21 @@
         </div>
 
         <!-- 新增/編輯 Modal -->
-        <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
-            aria-hidden="true">
+        
             <!--產品元件 get-products emit, getProducts-->
-            <product-modal 
+            <product-modal ref="productModal"
             :temp-product="tempProduct"
             @get-products="getProducts"
             :is-new="isNew"
             ></product-modal><!--Html是全部小寫-->
-        </div>
+
         <!--刪除 Modal元件標籤，需要與在做全域註冊 product.js的 'delete-model'元件名稱相同-->
-        <div id="deleteModal" ref="deleteModal" class="modal fade" tabindex="-1"
-            aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <delete-modal 
+        
+            <delete-modal ref="delProduct"
             :product="tempProduct" 
             @get-products="getProducts"
             ></delete-modal>
-        </div>
+        
         <!-- Modal -->
     </div>
 
