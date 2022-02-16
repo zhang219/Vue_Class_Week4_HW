@@ -78,7 +78,7 @@
             </table>
             <!--內層：pages, 外層：pagination-->
             <!--v-on內層:get-product, 外層:getProducts，將內層送到外層-->
-            <pagination :pages="pagination" @emit="getProducts"></pagination><!--分頁標籤-->
+            <pagination :pages="pagination" @get-products="getProducts"></pagination><!--分頁標籤-->
         </div>
 
         <!-- 新增/編輯 Modal -->
