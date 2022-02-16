@@ -14,7 +14,7 @@
     <div id="app">
         <div class="container">
             <div class="text-end mt-4">
-                <button class="btn btn-primary" type="button" @click="openModal('New')">
+                <button class="btn btn-primary" type="button" @click="openModal('new')">
                     <!--用字串做判斷-->
                     建立新的產品
                 </button>
@@ -78,7 +78,7 @@
             </table>
             <!--內層：pages, 外層：pagination-->
             <!--v-on內層:get-product, 外層:getProducts，將內層送到外層-->
-            <pagination :pages="pagination" @get-product="getProducts"></pagination><!--分頁標籤-->
+            <pagination :pages="pagination" @emit-pages="getProducts"></pagination><!--分頁標籤-->
         </div>
 
         <!-- 新增/編輯 Modal -->
@@ -87,7 +87,8 @@
             <!--產品元件 get-products emit, getProducts-->
             <product-modal 
             :temp-product="tempProduct"
-            v-on:get-products="getProducts"
+            @get-products="getProducts"
+            :is-new="isNew"
             ></product-modal><!--Html是全部小寫-->
         </div>
         <!--刪除 Modal元件標籤，需要與在做全域註冊 product.js的 'delete-model'元件名稱相同-->
@@ -95,7 +96,7 @@
             aria-labelledby="deleteModalLabel" aria-hidden="true">
             <delete-modal 
             :product="tempProduct" 
-            v-on:get-products="getProducts"
+            @get-products="getProducts"
             ></delete-modal>
         </div>
         <!-- Modal -->
