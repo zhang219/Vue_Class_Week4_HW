@@ -89,6 +89,7 @@ app.component('productModal', {
         return {
             apiUrl: 'https://vue3-course-api.hexschool.io/v2',
             apiPath: 'zhang-hexschool',
+            isNew: false //  v-if="isNew"，元件內定義 isNew 
         };
     },
     methods: {
@@ -129,7 +130,7 @@ app.component('productModal', {
 
 //全域註冊，刪除 Modal
 app.component('deleteModal', {
-    props: ['Product'],
+    props: ['tempProduct'], //deleteModal 樣板內有使用到 tempProduct 資料，元件內需定義
     template: '#templateForDeleteProductModal',
     data() {
         return {
