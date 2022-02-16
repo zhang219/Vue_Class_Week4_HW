@@ -5,6 +5,9 @@ let productModal = null;
 let deleteModal = null;
 
 const app = createApp({
+    components: {
+        pagination
+    },//區域註冊 使用的物件屬性
     data() {
         return {
             apiUrl: 'https://vue3-course-api.hexschool.io/v2',
@@ -79,15 +82,7 @@ const app = createApp({
     }
 })
 
-// 分頁元件
-app.component('pagination', {
-    props: ['pages'],
-    methods: {
-        emitPages(item) {
-            this.$emit('emit-pages', item);
-        },
-    },
-});
+
 
 //全域註冊  產品新增/編輯元件
 app.component('productModal', {
@@ -168,7 +163,7 @@ app.component('deleteModal', {
         },
     },
     mounted() {
-        deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal = new bootstrap.Modal(document.getElementById('delProductModal'));
     }
 });
 
