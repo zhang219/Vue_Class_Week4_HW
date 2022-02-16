@@ -84,25 +84,27 @@
         <!-- 新增/編輯 Modal -->
         
             <!--產品元件 get-products emit, getProducts-->
-            <product-modal ref="productModal"
+        <product-modal ref="productModal"
             :temp-product="tempProduct"
             @get-products="getProducts"
             :is-new="isNew"
-            ></product-modal><!--Html是全部小寫-->
+        ></product-modal><!--Html是全部小寫-->
 
         <!--刪除 Modal元件標籤，需要與在做全域註冊 product.js的 'delete-model'元件名稱相同-->
         
-            <delete-modal ref="delProduct"
+        <delete-modal ref="delProduct"
             :temp-product="tempProduct" 
             @get-products="getProducts"
-            ></delete-modal>
+        ></delete-modal>
         
         <!-- Modal -->
     </div>
 
     <!--要寫在DOM元素外層-->
-    <script type="text/x-template" id="templateForProductModal">
-        <div class="modal-dialog modal-xl">
+    <script type="text/x-template" id="productModal">
+        <div id="productModal" ref="modal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
+        aria-hidden="true">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content border-0">
                     <div class="modal-header bg-dark text-white">
                         <h5 id="productModalLabel" class="modal-title">
@@ -209,34 +211,39 @@
                     </div>
                 </div>
             </div>
+        </div>
     </script>
     
-    <script type="text/x-template" id="templateForDeleteProductModal">
-        <div class="modal-dialog">
-                <div class="modal-content border-0">
-                    <div class="modal-header bg-danger text-white">
-                        <h5 id="deleteModalLabel" class="modal-title">
-                            <span>刪除產品</span>
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <script type="text/x-template" id="delProductModal">
+        <div id="delProductModal" ref="modal" class="modal fade" tabindex="-1" aria-labelledby="delProductModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                    <div class="modal-content border-0">
+                        <div class="modal-header bg-danger text-white">
+                            <h5 id="deleteModalLabel" class="modal-title">
+                                <span>刪除產品</span>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            是否刪除
+                            <strong class="text-danger">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
+                            <!--加入品項名稱-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                取消
+                            </button>
+                            <button type="button" class="btn btn-danger" @click="delProduct">
+                                <!--綁定刪除方法-->
+                                確認刪除
+                            </button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        是否刪除
-                        <strong class="text-danger">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
-                        <!--加入品項名稱-->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            取消
-                        </button>
-                        <button type="button" class="btn btn-danger" @click="delProduct">
-                            <!--綁定刪除方法-->
-                            確認刪除
-                        </button>
-                    </div>
-                </div>
             </div>
+        </div>
     </script>
+    
 
     <!-- Bootstrap JavaScript-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js'></script>

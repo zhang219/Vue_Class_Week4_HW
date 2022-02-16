@@ -93,7 +93,7 @@ app.component('pagination', {
 //全域註冊  產品新增/編輯元件
 app.component('productModal', {
     props: ['tempProduct', 'isNew'],
-    template: '#templateForProductModal',
+    template: '#productModal',
     data() {
         return {
             apiUrl: 'https://vue3-course-api.hexschool.io/v2',
@@ -140,7 +140,7 @@ app.component('productModal', {
 //全域註冊，刪除 Modal
 app.component('deleteModal', {
     props: ['tempProduct'], //deleteModal 樣板內有使用到 tempProduct 資料，元件內需定義
-    template: '#templateForDeleteProductModal',
+    template: '#delProductModal',
     data() {
         return {
             apiUrl: 'https://vue3-course-api.hexschool.io/v2',
