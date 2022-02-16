@@ -81,7 +81,6 @@ const app = createApp({
 
 // 分頁元件
 app.component('pagination', {
-    template: '#pagination',
     props: ['pages'],
     methods: {
         emitPages(item) {
