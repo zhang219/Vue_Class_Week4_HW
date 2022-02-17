@@ -150,7 +150,7 @@ app.component('deleteModal', {
             axios.delete(url)
                 .then((response) => {
                     console.log(response);
-                    this.$emit('get-products')//觸發外層事件
+                    this.$emit('update-product')//觸發外層事件
                     deleteModal.hide();//將Model關掉
                 })
                 .catch((err) => {
