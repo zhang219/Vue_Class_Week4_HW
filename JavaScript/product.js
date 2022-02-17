@@ -135,6 +135,7 @@ app.component('productModal', {
 //全域註冊，刪除 Modal
 app.component('deleteModal', {
     props: ['tempProduct'], //deleteModal 樣板內有使用到 tempProduct 資料，元件內需定義
+    emit: ['updateProduct'],//引入emit
     template: '#delProductModal',
     data() {
         return {
