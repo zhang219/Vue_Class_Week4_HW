@@ -86,15 +86,15 @@
             <!--產品元件 get-products emit, getProducts-->
         <product-modal ref="productModal"
             :temp-product="tempProduct"
-            @update="getProducts"
+            @update-product="getProducts"
             :is-new="isNew"
-        ></product-modal><!--Html是全部小寫-->
+        ></product-modal><!--Html是全部小寫，@update-product="getProducts" //這裡要綁定內層傳出來溝通的函式跟傳給內層的函式-->
 
         <!--刪除 Modal元件標籤，需要與在做全域註冊 product.js的 'delete-model'元件名稱相同-->
         
         <delete-modal ref="delProduct"
             :temp-product="tempProduct" 
-            @update="getProducts"
+            @update-product="getProducts"
         ></delete-modal>
         
         <!-- Modal -->
