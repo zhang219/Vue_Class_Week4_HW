@@ -87,6 +87,7 @@ const app = createApp({
 //全域註冊  產品新增/編輯元件
 app.component('productModal', {
     props: ['tempProduct', 'isNew'],
+    emit: ['updateProduct'],//引入emit
     template: '#productModal',
     data() {
         return {
@@ -108,7 +109,7 @@ app.component('productModal', {
                 .then((response) => {
                     console.log(response);
                     //this.getProducts(); //沒有get Product(外層的方法)
-                    this.$emit('get-products')//觸發外層事件
+                    this.$emit('update-product')//觸發外層綁定的函式
                     this.hideModal();//將Model關掉
                 })
                 .catch((err) => {
