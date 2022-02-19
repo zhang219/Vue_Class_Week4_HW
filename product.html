@@ -143,6 +143,10 @@
                                         @click="tempProduct.imagesUrl.pop()">刪除最後一個</button>
                                     <!--js刪除陣列-->
                                 </div>
+                                <div v-else>
+                                    <button type="button" class="btn btn-outline-primary btn-sm d-block w-100" @click="createImages">新增</button>
+                                </div>
+                                <!--當 tempProduct.imagesUrl 為空，不為陣列時，新增按鈕就會顯示在畫面上，若沒加上在多圖設置沒有資料時，程式會找不到-->
                             </div>
                             <div class="col-sm-8">
                                 <div class="mb-3">
